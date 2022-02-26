@@ -1,4 +1,4 @@
-function updateMobileCount (isIncreasing , itemid , updatePrice , price){
+function updateMobileCount (isIncreasing , itemid , updatePrice , price , subtotal , taxtotal){
     const addInput = document.getElementById(itemid);
     const addInputValue = addInput.value;
     const addButton =parseInt(addInputValue);
@@ -18,8 +18,20 @@ function updateMobileCount (isIncreasing , itemid , updatePrice , price){
         const mobilePriceInputText = parseInt(mobilePriceText);
        const mobilePriceUpdate = addInput.value * price ;
        mobilePriceInput.innerText = mobilePriceUpdate;
-    
 
+       
+    let subtotalInput = document.getElementById(subtotal);
+     const subtotalInputText = subtotalInput.innerText;
+     const subtotalNumber = parseInt(subtotalInputText);
+     const subtotalUpdate =  addInput.value * price;
+     subtotalInput.innerText = subtotalUpdate;
+     
+    let taxtotalInput = document.getElementById(taxtotal);
+     const taxtotalInputText = taxtotalInput.innerText;
+     const taxtotalNumber = parseInt(taxtotalInputText);
+     const taxtotalUpdate =  (subtotalUpdate * 20) / 100;
+    taxtotalInput.innerText = taxtotalUpdate;
+     
 }
 
 
@@ -32,7 +44,7 @@ function updateMobileCount (isIncreasing , itemid , updatePrice , price){
 
 
 document.getElementById('add-button').addEventListener('click' , function(){
-    updateMobileCount(true , 'add-input' , 'mobile-price' ,1219);
+    updateMobileCount(true , 'add-input' , 'mobile-price' ,1219 ,'sub-total' ,'tax-total');
 //     const addInput = document.getElementById('add-input');
 //     const addInputValue = addInput.value;
 //     const addButton =parseInt(addInputValue);
@@ -52,7 +64,7 @@ document.getElementById('add-button').addEventListener('click' , function(){
 
 document.getElementById('minus-button').addEventListener('click' , function(){
     const addInput = document.getElementById('add-input');
-    updateMobileCount(false , 'add-input' , 'mobile-price', 1219);
+    updateMobileCount(false , 'add-input' , 'mobile-price', 1219,'sub-total' , 'tax-total');
    
   
 //         const addInputValue = addInput.value;
@@ -76,8 +88,8 @@ document.getElementById('minus-button').addEventListener('click' , function(){
     // case system update 
 
     document.getElementById('case-plus').addEventListener('click' , function(){
-       updateMobileCount (true , 'case-input' , 'case-money' , 59  );
+       updateMobileCount (true , 'case-input' , 'case-money' , 59, 'sub-total' ,'tax-total'  );
     });
     document.getElementById('case-minus').addEventListener('click' , function(){
-        updateMobileCount(false , 'case-input' , 'case-money' , 59  );
+        updateMobileCount(false , 'case-input' , 'case-money' , 59 , 'sub-total' ,'tax-total'  );
     })

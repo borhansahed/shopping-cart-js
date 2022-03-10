@@ -1,4 +1,7 @@
-function updateMobileCount (isIncreasing , itemid , updatePrice , price , subtotal , taxtotal){
+
+// main function
+
+function updateMobileCount (isIncreasing , itemid , updatePrice , price){
     const addInput = document.getElementById(itemid);
     const addInputValue = addInput.value;
     const addButton =parseInt(addInputValue);
@@ -19,19 +22,29 @@ function updateMobileCount (isIncreasing , itemid , updatePrice , price , subtot
        const mobilePriceUpdate = addInput.value * price ;
        mobilePriceInput.innerText = mobilePriceUpdate;
 
-       
-    let subtotalInput = document.getElementById(subtotal);
-     const subtotalInputText = subtotalInput.innerText;
-     const subtotalNumber = parseInt(subtotalInputText);
-     const subtotalUpdate =  addInput.value * price;
-     subtotalInput.innerText = subtotalUpdate;
-     
-    let taxtotalInput = document.getElementById(taxtotal);
-     const taxtotalInputText = taxtotalInput.innerText;
-     const taxtotalNumber = parseInt(taxtotalInputText);
-     const taxtotalUpdate =  (subtotalUpdate * 20) / 100;
-    taxtotalInput.innerText = taxtotalUpdate;
-     
+
+       calculateTotal ();
+}
+// get input for calculateTotal 
+function getInput (product){
+    const productInput = document.getElementById(product);
+    const productInputText =parseInt(productInput.value);
+   
+    return productInputText;
+
+}
+// calculateTotal cost system 
+function calculateTotal () {
+    const mobilePrice = getInput('add-input') * 1219;
+    const mobileCase =getInput('case-input') *59;
+    const subtotal = mobilePrice + mobileCase;
+    const tax = (subtotal *10) / 100;
+    const total = subtotal + tax;
+    // show in html 
+    document.getElementById('sub-total').innerText=subtotal;
+    document.getElementById('tax-total').innerText=tax;
+    document.getElementById('total').innerText=total;
+    
 }
 
 
@@ -39,48 +52,17 @@ function updateMobileCount (isIncreasing , itemid , updatePrice , price , subtot
 
 
 
-
-
-
+// mobile price event listener
 
 document.getElementById('add-button').addEventListener('click' , function(){
-    updateMobileCount(true , 'add-input' , 'mobile-price' ,1219 ,'sub-total' ,'tax-total');
-//     const addInput = document.getElementById('add-input');
-//     const addInputValue = addInput.value;
-//     const addButton =parseInt(addInputValue);
-//     const addButtonUpdate = addButton + 1;
-//     addInput.value = addButtonUpdate;
-
-//     // update price 
-
-//     let mobilePriceInput = document.getElementById('mobile-price');
-//     const mobilePriceText = mobilePriceInput.innerText
-
-    
-//     const mobilePriceInputText = parseInt(mobilePriceText);
-//    const mobilePriceUpdate = addInput.value * 1219 ;
-//    mobilePriceInput.innerText = mobilePriceUpdate;
+    updateMobileCount(true , 'add-input' , 'mobile-price' ,1219);
+    grandTotal('subtotal' ,'tax-total');
 });
 
 document.getElementById('minus-button').addEventListener('click' , function(){
     const addInput = document.getElementById('add-input');
-    updateMobileCount(false , 'add-input' , 'mobile-price', 1219,'sub-total' , 'tax-total');
+    updateMobileCount(false , 'add-input' , 'mobile-price', 1219);
    
-  
-//         const addInputValue = addInput.value;
-//         const addButton =parseInt(addInputValue);
-//         const addButtonUpdate = addButton - 1;
-//         addInput.value = addButtonUpdate;
-    
-//     // update price 
-//     let mobilePriceInput = document.getElementById('mobile-price');
-//     const mobilePriceText = mobilePriceInput.innerText
-
-    
-//      const mobilePriceInputText = parseInt(mobilePriceText);
-//    const mobilePriceUpdate = addInput.value * 1219
-//      ;
-//    mobilePriceInput.innerText = mobilePriceUpdate; 
 
     });
 
@@ -88,8 +70,8 @@ document.getElementById('minus-button').addEventListener('click' , function(){
     // case system update 
 
     document.getElementById('case-plus').addEventListener('click' , function(){
-       updateMobileCount (true , 'case-input' , 'case-money' , 59, 'sub-total' ,'tax-total'  );
+       updateMobileCount (true , 'case-input' , 'case-money' , 59  );
     });
     document.getElementById('case-minus').addEventListener('click' , function(){
-        updateMobileCount(false , 'case-input' , 'case-money' , 59 , 'sub-total' ,'tax-total'  );
+        updateMobileCount(false , 'case-input' , 'case-money' , 59 );
     })
